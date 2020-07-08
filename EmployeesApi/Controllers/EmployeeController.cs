@@ -13,17 +13,19 @@ namespace EmployeesApi.Controllers
     {
         private readonly EmployeesDataContext Context;
 
+
         public EmployeeController(EmployeesDataContext context)
         {
             Context = context;
         }
 
+       
         [HttpGet("employees")]
         public async Task<ActionResult> GetAllEmployees()
         {
             var employees = await Context.Employees
                 .Where(e => e.Active)
-                .Select(e => new EmployeeListItem
+                .Select(e => new EmployeeListItem// Employee -> EmployeesListItem
                 {
                     Id = e.Id,
                     FirstName = e.FirstName,
